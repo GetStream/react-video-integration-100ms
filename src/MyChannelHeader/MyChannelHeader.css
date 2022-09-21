@@ -1,0 +1,44 @@
+.custom-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 2rem;
+  border-bottom: 1px #d3d3d3 solid;
+}
+
+.custom-header h2 {
+  font-size: x-large;
+}
+
+.button-area {
+  display: flex;
+}
+
+.call-button {
+  --border-color: #d3d3d3;
+  --border-width: 1px;
+  background: white;
+  display: flex;
+  cursor: pointer;
+  align-items: center;
+  padding: 0 1rem;
+  height: 2rem;
+  border: var(--border-width) solid var(--border-color);
+  border-radius: 1rem;
+  transition: all 300ms;
+}
+
+.end-call-button {
+  margin-left: 1rem;
+  color: red;
+  --border-color: red;
+}
+
+.start-call-button:hover {
+  color: blue;
+  --border-color: blue;
+}
+
+.leave-call-button:hover {
+  --border-color: red;
+}

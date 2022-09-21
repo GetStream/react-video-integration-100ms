@@ -8,10 +8,12 @@ import {
   Thread,
   Window,
   ChannelList,
+  useChannelStateContext,
 } from 'stream-chat-react';
 
 import 'stream-chat-react/dist/css/v2/index.css';
 import './App.css';
+import MyChannelHeader from './MyChannelHeader/MyChannelHeader';
 
 // -- Constants
 const chatClientId = 'bwyj74v5hxzk';
@@ -36,18 +38,21 @@ chatClient.connectUser(
 
 const filters = { type: 'messaging', members: { $in: [userId] } };
 
-const App = () => (
-  <Chat client={chatClient} theme='str-chat__theme-light'>
-    <ChannelList filters={filters} />
-    <Channel>
-      <Window>
-        <ChannelHeader />
-        <MessageList />
-        <MessageInput />
-      </Window>
-      <Thread />
-    </Channel>
-  </Chat>
-);
+const App = () => {
+  const { channel } = useChannelStateContext();
+  return (
+    <Chat client={chatClient} theme='str-chat__theme-light'>
+      <ChannelList filters={filters} />
+      <Channel>
+        <Window>
+          <MyChannelHeader channelName={channel?.data?.name ?? 'Unknown'} />
+          <MessageList />
+          <MessageInput />
+        </Window>
+        <Thread />
+      </Channel>
+    </Chat>
+  );
+};
 
 export default App;
