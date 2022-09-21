@@ -1,34 +1,53 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import './App.css'
+import { StreamChat } from 'stream-chat';
+import {
+  Chat,
+  Channel,
+  ChannelHeader,
+  MessageInput,
+  MessageList,
+  Thread,
+  Window,
+  ChannelList,
+} from 'stream-chat-react';
 
-function App() {
-  const [count, setCount] = useState(0)
+import 'stream-chat-react/dist/css/v2/index.css';
+import './App.css';
 
-  return (
-    <div className="App">
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src="/vite.svg" className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://reactjs.org" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </div>
-  )
-}
+// -- Constants
+const chatClientId = 'bwyj74v5hxzk';
+const userToken =
+  'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoiVGVzdHVzZXIifQ.6P8dNLeAmJKvv4pwcohtNekdW_c7uregc5bv2pNJe-M';
+const userId = 'Testuser';
+const userName = 'Testuser';
+const imagePath =
+  'https://getstream.io/random_png/?id=lucky-snowflake-1&name=lucky-snowflake-1';
+// -----------
 
-export default App
+const chatClient = new StreamChat(chatClientId);
+
+chatClient.connectUser(
+  {
+    id: userId,
+    name: userName,
+    image: imagePath,
+  },
+  userToken
+);
+
+const filters = { type: 'messaging', members: { $in: [userId] } };
+
+const App = () => (
+  <Chat client={chatClient} theme='str-chat__theme-light'>
+    <ChannelList filters={filters} />
+    <Channel>
+      <Window>
+        <ChannelHeader />
+        <MessageList />
+        <MessageInput />
+      </Window>
+      <Thread />
+    </Channel>
+  </Chat>
+);
+
+export default App;
