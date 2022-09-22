@@ -1,22 +1,16 @@
 // import { useVideoContext } from '../VideoContext/VideoContext';
 import { useState } from 'react';
+import { ConnectionState } from '../context/VideoContext';
 import './MyChannelHeader.css';
 
 interface MyChannelHeaderProps {
   channelName: string;
 }
 
-enum VideoState {
-  NoCall,
-  CallAvailable,
-  Connecting,
-  InCall,
-}
-
 const MyChannelHeader = ({ channelName }: MyChannelHeaderProps) => {
   //   const { videoActive, callOngoing, createCall, joinCall, leaveCall, endCall } =
   //     useVideoContext();
-  const [videoState, setVideoState] = useState(VideoState.NoCall);
+  const [videoState, setVideoState] = useState(ConnectionState.NoCall);
 
   const endCall = () => {};
   const joinCall = () => {};
@@ -25,13 +19,13 @@ const MyChannelHeader = ({ channelName }: MyChannelHeaderProps) => {
 
   const onVideoButtonClick = () => {
     switch (videoState) {
-      case VideoState.NoCall:
+      case ConnectionState.NoCall:
         createCall();
         break;
-      case VideoState.CallAvailable:
+      case ConnectionState.CallAvailable:
         joinCall();
         break;
-      case VideoState.InCall:
+      case ConnectionState.InCall:
         leaveCall();
         break;
     }
@@ -39,24 +33,24 @@ const MyChannelHeader = ({ channelName }: MyChannelHeaderProps) => {
 
   const isVideoActive = (): boolean => {
     switch (videoState) {
-      case VideoState.NoCall:
-      case VideoState.CallAvailable:
+      case ConnectionState.NoCall:
+      case ConnectionState.CallAvailable:
         return false;
-      case VideoState.Connecting:
-      case VideoState.InCall:
+      case ConnectionState.Connecting:
+      case ConnectionState.InCall:
         return true;
     }
   };
 
   const buttonText = (): string => {
     switch (videoState) {
-      case VideoState.NoCall:
+      case ConnectionState.NoCall:
         return 'Create call';
-      case VideoState.CallAvailable:
+      case ConnectionState.CallAvailable:
         return 'Join call';
-      case VideoState.Connecting:
+      case ConnectionState.Connecting:
         return 'Connecting';
-      case VideoState.InCall:
+      case ConnectionState.InCall:
         return 'Leave Call';
     }
   };
@@ -73,7 +67,7 @@ const MyChannelHeader = ({ channelName }: MyChannelHeaderProps) => {
         >
           <p>{buttonText()}</p>
         </button>
-        {videoState == VideoState.InCall && (
+        {videoState == ConnectionState.InCall && (
           <button className='call-button end-call-button' onClick={endCall}>
             <p>End call</p>
           </button>

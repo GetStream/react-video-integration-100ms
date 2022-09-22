@@ -2,7 +2,6 @@ import { StreamChat } from 'stream-chat';
 import {
   Chat,
   Channel,
-  ChannelHeader,
   MessageInput,
   MessageList,
   Thread,
@@ -13,6 +12,7 @@ import {
 
 import 'stream-chat-react/dist/css/v2/index.css';
 import './App.css';
+import { VideoContextProvider } from './context/VideoContext';
 import MyChannelHeader from './MyChannelHeader/MyChannelHeader';
 
 // -- Constants
@@ -44,12 +44,14 @@ const App = () => {
     <Chat client={chatClient} theme='str-chat__theme-light'>
       <ChannelList filters={filters} />
       <Channel>
-        <Window>
-          <MyChannelHeader channelName={channel?.data?.name ?? 'Unknown'} />
-          <MessageList />
-          <MessageInput />
-        </Window>
-        <Thread />
+        <VideoContextProvider>
+          <Window>
+            <MyChannelHeader channelName={channel?.data?.name ?? 'Unknown'} />
+            <MessageList />
+            <MessageInput />
+          </Window>
+          <Thread />
+        </VideoContextProvider>
       </Channel>
     </Chat>
   );
