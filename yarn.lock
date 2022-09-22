@@ -5,6 +5,46 @@ __metadata:
   version: 5
   cacheKey: 8
 
+"@100mslive/hms-video-store@npm:0.6.0":
+  version: 0.6.0
+  resolution: "@100mslive/hms-video-store@npm:0.6.0"
+  dependencies:
+    "@100mslive/hms-video": 0.5.0
+    eventemitter2: ^6.4.7
+    immer: ^9.0.6
+    reselect: 4.0.0
+    zustand: 3.5.7
+  checksum: 5c6dc6cd2440c5b21674ac28f2fc7cc4e58873f77c4cfad43c74a9749be59f0f1c2709b25e1526dcf46046ab0e890517de6442c39310f4f0171d5aeb4706263e
+  languageName: node
+  linkType: hard
+
+"@100mslive/hms-video@npm:0.5.0":
+  version: 0.5.0
+  resolution: "@100mslive/hms-video@npm:0.5.0"
+  dependencies:
+    eventemitter2: ^6.4.7
+    sdp-transform: ^2.14.1
+    ua-parser-js: ^1.0.1
+    uuid: ^8.3.2
+    webrtc-adapter: ^8.0.0
+  checksum: e8dd562b2d0586499ab3052c1acfd598c57d9cf756a802fd923f7c57ae7043cb6a4309aa7889d8d71518c36af3f71c58e2568bf4d143dd81067a2e15432915d1
+  languageName: node
+  linkType: hard
+
+"@100mslive/react-sdk@npm:latest":
+  version: 0.4.0
+  resolution: "@100mslive/react-sdk@npm:0.4.0"
+  dependencies:
+    "@100mslive/hms-video-store": 0.6.0
+    react-intersection-observer: ^8.33.1
+    react-resize-detector: ^7.0.0
+    zustand: ^3.6.2
+  peerDependencies:
+    react: ">=17.0.2 <19.0.0"
+  checksum: ff16fe302eb9523360c3587898d766ac7339dace2c271417d016b4370f2f5c376caa284376b38a9f8235040c9101638f0483fb29b7c08a7621e59a42cd306df9
+  languageName: node
+  linkType: hard
+
 "@ampproject/remapping@npm:^2.1.0":
   version: 2.2.0
   resolution: "@ampproject/remapping@npm:2.2.0"
@@ -1300,6 +1340,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"eventemitter2@npm:^6.4.7":
+  version: 6.4.9
+  resolution: "eventemitter2@npm:6.4.9"
+  checksum: be59577c1e1c35509c7ba0e2624335c35bbcfd9485b8a977384c6cc6759341ea1a98d3cb9dbaa5cea4fff9b687e504504e3f9c2cc1674cf3bd8a43a7c74ea3eb
+  languageName: node
+  linkType: hard
+
 "extend@npm:^3.0.0":
   version: 3.0.2
   resolution: "extend@npm:3.0.2"
@@ -1566,6 +1613,13 @@ __metadata:
   dependencies:
     safer-buffer: ">= 2.1.2 < 3.0.0"
   checksum: 3f60d47a5c8fc3313317edfd29a00a692cc87a19cac0159e2ce711d0ebc9019064108323b5e493625e25594f11c6236647d8e256fbe7a58f4a3b33b89e6d30bf
+  languageName: node
+  linkType: hard
+
+"immer@npm:^9.0.6":
+  version: 9.0.15
+  resolution: "immer@npm:9.0.15"
+  checksum: 92e3d63e810e3c3c2bb61b70c45443e37ef983ad12924e3edaf03725ae5979618f5b473439bb3bb4a8c4769f25132f18dec10ea15c40f0b20da5691ff96ff611
   languageName: node
   linkType: hard
 
@@ -1861,6 +1915,13 @@ __metadata:
   version: 4.7.0
   resolution: "lodash.uniqby@npm:4.7.0"
   checksum: 659264545a95726d1493123345aad8cbf56e17810fa9a0b029852c6d42bc80517696af09d99b23bef1845d10d95e01b8b4a1da578f22aeba7a30d3e0022a4938
+  languageName: node
+  linkType: hard
+
+"lodash@npm:^4.17.21":
+  version: 4.17.21
+  resolution: "lodash@npm:4.17.21"
+  checksum: eb835a2e51d381e561e508ce932ea50a8e5a68f4ebdd771ea240d3048244a8d13658acbd502cd4829768c56f2e16bdd4340b9ea141297d472517b83868e677f7
   languageName: node
   linkType: hard
 
@@ -2365,6 +2426,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"react-intersection-observer@npm:^8.33.1":
+  version: 8.34.0
+  resolution: "react-intersection-observer@npm:8.34.0"
+  peerDependencies:
+    react: ^15.0.0 || ^16.0.0 || ^17.0.0|| ^18.0.0
+  checksum: 7713fecfd1512c7f5a60f9f0bf15403b8f8bbd4110bcafaeaea6de36a0e0eb60368c3638f99e9c97b75ad8fc787ea48c241dcb5c694f821d7f2976f709082cc5
+  languageName: node
+  linkType: hard
+
 "react-is@npm:^16.13.1, react-is@npm:^16.8.6":
   version: 16.13.1
   resolution: "react-is@npm:16.13.1"
@@ -2436,6 +2506,18 @@ __metadata:
   languageName: node
   linkType: hard
 
+"react-resize-detector@npm:^7.0.0":
+  version: 7.1.2
+  resolution: "react-resize-detector@npm:7.1.2"
+  dependencies:
+    lodash: ^4.17.21
+  peerDependencies:
+    react: ^16.0.0 || ^17.0.0 || ^18.0.0
+    react-dom: ^16.0.0 || ^17.0.0 || ^18.0.0
+  checksum: 55f4abad7f7523d16b081b5ab20f75c539a54a08253ce7e9df473d48386f42ceca6c31584ba9fa26e3528b498ef6685ec77fb9a22cffc97df05fb326d0bf1b26
+  languageName: node
+  linkType: hard
+
 "react-textarea-autosize@npm:^8.3.0":
   version: 8.3.4
   resolution: "react-textarea-autosize@npm:8.3.4"
@@ -2453,6 +2535,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "react-video-integration-100ms@workspace:."
   dependencies:
+    "@100mslive/react-sdk": latest
     "@types/react": ^18.0.17
     "@types/react-dom": ^18.0.6
     "@vitejs/plugin-react": ^2.1.0
@@ -2511,6 +2594,13 @@ __metadata:
   dependencies:
     mdast-util-from-markdown: ^0.8.0
   checksum: 50104880549639b7dd7ae6f1e23c214915fe9c054f02f3328abdaee3f6de6d7282bf4357c3c5b106958fe75e644a3c248c2197755df34f9955e8e028fc74868f
+  languageName: node
+  linkType: hard
+
+"reselect@npm:4.0.0":
+  version: 4.0.0
+  resolution: "reselect@npm:4.0.0"
+  checksum: ac7dfc9ef2cdb42b6fc87a856f3ce904c2e4363a2bc1e6fb7eea5f78902a6f506e4388e6509752984877c6dbfe501100c076671d334799eb5a1bfe9936cb2c12
   languageName: node
   linkType: hard
 
@@ -2599,6 +2689,22 @@ __metadata:
   dependencies:
     loose-envify: ^1.1.0
   checksum: d79192eeaa12abef860c195ea45d37cbf2bbf5f66e3c4dcd16f54a7da53b17788a70d109ee3d3dde1a0fd50e6a8fc171f4300356c5aee4fc0171de526bf35f8a
+  languageName: node
+  linkType: hard
+
+"sdp-transform@npm:^2.14.1":
+  version: 2.14.1
+  resolution: "sdp-transform@npm:2.14.1"
+  bin:
+    sdp-verify: checker.js
+  checksum: 8b3179786db1a0f1ebfdacb1ac0dfe2833e63e8c64b638884cec212455061d53beaa8d9c8bf76fdbd5f844b7885f3892adec27e87734cfbc2b3e5c65e18a489b
+  languageName: node
+  linkType: hard
+
+"sdp@npm:^3.0.2":
+  version: 3.0.3
+  resolution: "sdp@npm:3.0.3"
+  checksum: 3ffe6483a7967d93472ca8eb14d30cffe6ce94430c42dbfdc970d23d3c4226916a80d41bf4a70355a15f8310cd032ef25187cc5dc80b6724e2d357ea949481b0
   languageName: node
   linkType: hard
 
@@ -2867,6 +2973,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"ua-parser-js@npm:^1.0.1":
+  version: 1.0.2
+  resolution: "ua-parser-js@npm:1.0.2"
+  checksum: ff7f6d79a9c1a38aa85a0e751040fc7e17a0b621bda876838d14ebe55aca4e50e68da0350f181e58801c2d8a35e7db4e12473776e558910c4b7cabcec96aa3bf
+  languageName: node
+  linkType: hard
+
 "unified@npm:^9.0.0":
   version: 9.2.2
   resolution: "unified@npm:9.2.2"
@@ -3016,6 +3129,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"uuid@npm:^8.3.2":
+  version: 8.3.2
+  resolution: "uuid@npm:8.3.2"
+  bin:
+    uuid: dist/bin/uuid
+  checksum: 5575a8a75c13120e2f10e6ddc801b2c7ed7d8f3c8ac22c7ed0c7b2ba6383ec0abda88c905085d630e251719e0777045ae3236f04c812184b7c765f63a70e58df
+  languageName: node
+  linkType: hard
+
 "vfile-message@npm:^2.0.0":
   version: 2.0.4
   resolution: "vfile-message@npm:2.0.4"
@@ -3079,6 +3201,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"webrtc-adapter@npm:^8.0.0":
+  version: 8.1.2
+  resolution: "webrtc-adapter@npm:8.1.2"
+  dependencies:
+    sdp: ^3.0.2
+  checksum: 24b5bb0250349528c2ac862f114f3ff7417e16dc3a6c0f19046fa8a96c431a4c4d0fec7e1c5566434f639f4865281239b404a1bb58c8dfd8fc41f8401722c0fe
+  languageName: node
+  linkType: hard
+
 "which@npm:^2.0.2":
   version: 2.0.2
   resolution: "which@npm:2.0.2"
@@ -3132,5 +3263,29 @@ __metadata:
   version: 4.0.0
   resolution: "yallist@npm:4.0.0"
   checksum: 343617202af32df2a15a3be36a5a8c0c8545208f3d3dfbc6bb7c3e3b7e8c6f8e7485432e4f3b88da3031a6e20afa7c711eded32ddfb122896ac5d914e75848d5
+  languageName: node
+  linkType: hard
+
+"zustand@npm:3.5.7":
+  version: 3.5.7
+  resolution: "zustand@npm:3.5.7"
+  peerDependencies:
+    react: ">=16.8"
+  peerDependenciesMeta:
+    react:
+      optional: true
+  checksum: cbe18c56fc211f3e32b655b72dfcde1b57fad347eeac3002f1751b81ea0e6a845e790c633b2dc81e3d905610376afed80260116ff0716e75be09d6073a5fee35
+  languageName: node
+  linkType: hard
+
+"zustand@npm:^3.6.2":
+  version: 3.7.2
+  resolution: "zustand@npm:3.7.2"
+  peerDependencies:
+    react: ">=16.8"
+  peerDependenciesMeta:
+    react:
+      optional: true
+  checksum: 18f025b1b666a311121d3855303ff58e6a21fd107920ca474307e86984c13338d6c4cfa5cdf13382a9e0f76821f2554a12d4d200a98a66b58637e729f149797b
   languageName: node
   linkType: hard

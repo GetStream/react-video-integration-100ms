@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@100mslive/react-sdk": "latest",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "stream-chat": "^7.1.0",

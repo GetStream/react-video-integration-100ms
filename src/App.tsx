@@ -1,3 +1,4 @@
+import { HMSRoomProvider } from '@100mslive/react-sdk';
 import { StreamChat } from 'stream-chat';
 import {
   Chat,
@@ -41,19 +42,21 @@ const filters = { type: 'messaging', members: { $in: [userId] } };
 const App = () => {
   const { channel } = useChannelStateContext();
   return (
-    <Chat client={chatClient} theme='str-chat__theme-light'>
-      <ChannelList filters={filters} />
-      <Channel>
-        <VideoContextProvider>
-          <Window>
-            <MyChannelHeader channelName={channel?.data?.name ?? 'Unknown'} />
-            <MessageList />
-            <MessageInput />
-          </Window>
-          <Thread />
-        </VideoContextProvider>
-      </Channel>
-    </Chat>
+    <HMSRoomProvider>
+      <Chat client={chatClient} theme='str-chat__theme-light'>
+        <ChannelList filters={filters} />
+        <Channel>
+          <VideoContextProvider>
+            <Window>
+              <MyChannelHeader channelName={channel?.data?.name ?? 'Unknown'} />
+              <MessageList />
+              <MessageInput />
+            </Window>
+            <Thread />
+          </VideoContextProvider>
+        </Channel>
+      </Chat>
+    </HMSRoomProvider>
   );
 };
 
