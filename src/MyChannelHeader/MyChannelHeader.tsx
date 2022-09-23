@@ -1,24 +1,16 @@
 // import { useVideoContext } from '../VideoContext/VideoContext';
-import { useState } from 'react';
-import { ConnectionState } from '../context/VideoContext';
+import { ReactNode } from 'react';
+import { useChannelStateContext } from 'stream-chat-react';
+import { ConnectionState, useVideoContext } from '../context/VideoContext';
 import './MyChannelHeader.css';
 
-interface MyChannelHeaderProps {
-  channelName: string;
-}
-
-const MyChannelHeader = ({ channelName }: MyChannelHeaderProps) => {
-  //   const { videoActive, callOngoing, createCall, joinCall, leaveCall, endCall } =
-  //     useVideoContext();
-  const [videoState, setVideoState] = useState(ConnectionState.NoCall);
-
-  const endCall = () => {};
-  const joinCall = () => {};
-  const createCall = () => {};
-  const leaveCall = () => {};
+const MyChannelHeader = () => {
+  const { channel } = useChannelStateContext();
+  const { connectionState, createCall, joinCall, leaveCall, endCall } =
+    useVideoContext();
 
   const onVideoButtonClick = () => {
-    switch (videoState) {
+    switch (connectionState) {
       case ConnectionState.NoCall:
         createCall();
         break;
@@ -31,25 +23,48 @@ const MyChannelHeader = ({ channelName }: MyChannelHeaderProps) => {
     }
   };
 
-  const isVideoActive = (): boolean => {
-    switch (videoState) {
+  const callArea = (): ReactNode => {
+    switch (connectionState) {
       case ConnectionState.NoCall:
       case ConnectionState.CallAvailable:
-        return false;
+        return (
+          <button
+            className='call-button start-call-button'
+            onClick={onVideoButtonClick}
+          >
+            {buttonText()}
+          </button>
+        );
       case ConnectionState.Connecting:
+      case ConnectionState.Disconnecting:
+        return <p className='call-button'>{buttonText()}</p>;
       case ConnectionState.InCall:
-        return true;
+        return (
+          <>
+            <button
+              className='call-button leave-call-button'
+              onClick={onVideoButtonClick}
+            >
+              <p>{buttonText()}</p>
+            </button>
+            <button className='call-button end-call-button' onClick={endCall}>
+              <p>End call</p>
+            </button>
+          </>
+        );
     }
   };
 
   const buttonText = (): string => {
-    switch (videoState) {
+    switch (connectionState) {
       case ConnectionState.NoCall:
         return 'Create call';
       case ConnectionState.CallAvailable:
         return 'Join call';
       case ConnectionState.Connecting:
         return 'Connecting';
+      case ConnectionState.Disconnecting:
+        return 'Disconnecting';
       case ConnectionState.InCall:
         return 'Leave Call';
     }
@@ -57,22 +72,8 @@ const MyChannelHeader = ({ channelName }: MyChannelHeaderProps) => {
 
   return (
     <div className='custom-header'>
-      <h2>{channelName}</h2>
-      <div className='button-area'>
-        <button
-          className={`call-button ${
-            isVideoActive() ? 'leave-call-button' : 'start-call-button'
-          }`}
-          onClick={onVideoButtonClick}
-        >
-          <p>{buttonText()}</p>
-        </button>
-        {videoState == ConnectionState.InCall && (
-          <button className='call-button end-call-button' onClick={endCall}>
-            <p>End call</p>
-          </button>
-        )}
-      </div>
+      <h2>{channel?.data?.name ?? 'Unknown'}</h2>
+      <div className='button-area'>{callArea()}</div>
     </div>
   );
 };

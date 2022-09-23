@@ -40,15 +40,22 @@ export const VideoContextProvider = ({ children }: { children: ReactNode }) => {
   const hmsActions = useHMSActions();
 
   const [connectionState, setConnectionState] = useState(
-    ConnectionState.NoCall
+    channel.data?.data?.callActive
+      ? ConnectionState.CallAvailable
+      : ConnectionState.NoCall
   );
 
   useEffect(() => {
     const handleChannelUpdate = (event: any) => {
-      if (event.channel.data?.data?.callActive) {
+      if (event.channel.data?.callActive) {
+        console.log('[handleChannelUpdate] call is active');
         if (connectionState == ConnectionState.NoCall) {
+          console.log('[handleChannelUpdate] NoCall active');
+
           setConnectionState(ConnectionState.CallAvailable);
         } else if (connectionState == ConnectionState.Connecting) {
+          console.log('[handleChannelUpdate] Connecting');
+
           setConnectionState(ConnectionState.InCall);
         }
       } else {
@@ -61,7 +68,7 @@ export const VideoContextProvider = ({ children }: { children: ReactNode }) => {
     return () => {
       client.off('channel.updated', handleChannelUpdate);
     };
-  }, []);
+  }, [connectionState]);
 
   useEffect(() => {
     window.onunload = () => {
@@ -84,6 +91,7 @@ export const VideoContextProvider = ({ children }: { children: ReactNode }) => {
         userName: client.user?.name ?? 'Unkown',
       });
 
+      console.log('Updating channel');
       await channel.updatePartial({
         set: {
           data: {
@@ -96,7 +104,9 @@ export const VideoContextProvider = ({ children }: { children: ReactNode }) => {
     joinCall: async () => {
       setConnectionState(ConnectionState.Connecting);
 
-      const response = await client.getCallToken(channel.data?.data?.callId);
+      const response = await client.getCallToken(
+        channel.data?.data?.callId as string
+      );
 
       await hmsActions.join({
         authToken: `${response.token}`,

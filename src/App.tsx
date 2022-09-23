@@ -40,7 +40,6 @@ chatClient.connectUser(
 const filters = { type: 'messaging', members: { $in: [userId] } };
 
 const App = () => {
-  const { channel } = useChannelStateContext();
   return (
     <HMSRoomProvider>
       <Chat client={chatClient} theme='str-chat__theme-light'>
@@ -48,7 +47,7 @@ const App = () => {
         <Channel>
           <VideoContextProvider>
             <Window>
-              <MyChannelHeader channelName={channel?.data?.name ?? 'Unknown'} />
+              <MyChannelHeader />
               <MessageList />
               <MessageInput />
             </Window>
