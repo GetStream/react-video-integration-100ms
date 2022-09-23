@@ -8,13 +8,13 @@ import {
   Thread,
   Window,
   ChannelList,
-  useChannelStateContext,
 } from 'stream-chat-react';
 
 import 'stream-chat-react/dist/css/v2/index.css';
 import './App.css';
 import { VideoContextProvider } from './context/VideoContext';
 import MyChannelHeader from './MyChannelHeader/MyChannelHeader';
+import VideoGrid from './VideoGrid/VideoGrid';
 
 // -- Constants
 const chatClientId = 'bwyj74v5hxzk';
@@ -48,6 +48,7 @@ const App = () => {
           <VideoContextProvider>
             <Window>
               <MyChannelHeader />
+              <VideoGrid />
               <MessageList />
               <MessageInput />
             </Window>
