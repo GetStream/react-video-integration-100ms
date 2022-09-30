@@ -9,7 +9,7 @@ const VideoGrid = () => {
   const peers = useHMSStore(selectPeers);
   return (
     <>
-      {connectionState == ConnectionState.InCall && (
+      {connectionState === ConnectionState.InCall && (
         <div className='video-grid'>
           {peers.map((peer) => (
             <Peer key={peer.id} peer={peer} />
