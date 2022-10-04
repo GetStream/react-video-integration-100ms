@@ -12,7 +12,10 @@ import {
 
 import 'stream-chat-react/dist/css/v2/index.css';
 import './App.css';
-import { VideoContextProvider } from './context/VideoContext';
+import {
+  VideoContextProvider,
+  StreamChatGenerics,
+} from './context/VideoContext';
 import MyChannelHeader from './MyChannelHeader/MyChannelHeader';
 import VideoGrid from './VideoGrid/VideoGrid';
 
@@ -26,7 +29,7 @@ const imagePath =
   'https://getstream.io/random_png/?id=lucky-snowflake-1&name=lucky-snowflake-1';
 // -----------
 
-const chatClient = new StreamChat(chatClientId);
+const chatClient = new StreamChat<StreamChatGenerics>(chatClientId);
 
 chatClient.connectUser(
   {
@@ -42,7 +45,7 @@ const filters = { type: 'messaging', members: { $in: [userId] } };
 const App = () => {
   return (
     <HMSRoomProvider>
-      <Chat client={chatClient} theme='str-chat__theme-light'>
+      <Chat client={chatClient} theme="str-chat__theme-light">
         <ChannelList filters={filters} />
         <Channel>
           <VideoContextProvider>
