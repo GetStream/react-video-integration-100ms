@@ -8,8 +8,17 @@ import {
   useState,
 } from 'react';
 import { useChannelStateContext, useChatContext } from 'stream-chat-react';
+import { Event, DefaultGenerics } from 'stream-chat';
 import { useHMSActions } from '@100mslive/react-sdk';
-import { Event } from 'stream-chat';
+
+export type StreamChatGenerics = {
+  channelType: {
+    data?: {
+      callActive?: boolean;
+      callId?: string;
+    };
+  };
+} & Omit<DefaultGenerics, 'channelType'>;
 
 export enum ConnectionState {
   NoCall,
@@ -38,8 +47,8 @@ const defaultState: VideoState = {
 export const VideoContext = createContext<VideoState>(defaultState);
 
 export const VideoContextProvider = ({ children }: { children: ReactNode }) => {
-  const { channel } = useChannelStateContext();
-  const { client } = useChatContext();
+  const { channel } = useChannelStateContext<StreamChatGenerics>();
+  const { client } = useChatContext<StreamChatGenerics>();
   const hmsActions = useHMSActions();
 
   const [connectionState, setConnectionState] = useState(
@@ -57,7 +66,7 @@ export const VideoContextProvider = ({ children }: { children: ReactNode }) => {
     });
 
     await hmsActions.join({
-      authToken: `${response.token}`,
+      authToken: response.token as string,
       userName: client.user?.name || 'Unkown',
     });
 
@@ -66,11 +75,11 @@ export const VideoContextProvider = ({ children }: { children: ReactNode }) => {
       set: {
         data: {
           callActive: true,
-          callId: response.call.id,
+          callId: response.call.id as string,
         },
       },
     });
-  }, []);
+  }, [channel.cid]);
 
   const joinCall = useCallback(async () => {
     setConnectionState(ConnectionState.Connecting);
@@ -80,12 +89,12 @@ export const VideoContextProvider = ({ children }: { children: ReactNode }) => {
     );
 
     await hmsActions.join({
-      authToken: `${response.token}`,
+      authToken: response.token as string,
       userName: client.user?.name || 'Unkown',
     });
 
     setConnectionState(ConnectionState.InCall);
-  }, []);
+  }, [channel.cid]);
 
   const leaveCall = useCallback(async () => {
     setConnectionState(ConnectionState.Disconnecting);
@@ -93,7 +102,7 @@ export const VideoContextProvider = ({ children }: { children: ReactNode }) => {
     await hmsActions.leave();
 
     setConnectionState(ConnectionState.CallAvailable);
-  }, []);
+  }, [channel.cid]);
 
   const endCall = useCallback(async () => {
     setConnectionState(ConnectionState.Disconnecting);
@@ -107,10 +116,10 @@ export const VideoContextProvider = ({ children }: { children: ReactNode }) => {
         },
       },
     });
-  }, []);
+  }, [channel.cid]);
 
   useEffect(() => {
-    const handleChannelUpdate = (event: Event) => {
+    const handleChannelUpdate = (event: Event<StreamChatGenerics>) => {
       if (event.channel?.data?.callActive) {
         console.log('[handleChannelUpdate] call is active');
         if (connectionState === ConnectionState.NoCall) {
@@ -144,12 +153,12 @@ export const VideoContextProvider = ({ children }: { children: ReactNode }) => {
   const store = useMemo(
     () => ({
       connectionState,
-      createCall: createCall,
-      joinCall: joinCall,
-      leaveCall: leaveCall,
-      endCall: endCall,
+      createCall,
+      joinCall,
+      leaveCall,
+      endCall,
     }),
-    [connectionState]
+    [connectionState, createCall, joinCall, leaveCall, endCall]
   );
 
   return (
